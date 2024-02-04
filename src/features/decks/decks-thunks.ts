@@ -1,6 +1,7 @@
 import { addDeckAC, setDecksAC } from './decks-reducer.ts'
 import { decksAPI } from './decks-api.ts'
 import { AppThunk } from '../../app/store.ts'
+import {Dispatch} from "redux";
 
 export const fetchDecksTC = (): AppThunk => async (dispatch) => {
   try {
@@ -11,10 +12,8 @@ export const fetchDecksTC = (): AppThunk => async (dispatch) => {
   }
 }
 
-export const addDeckTC = (name: string): AppThunk => {
-  return (dispatch) => {
-    decksAPI.createDeck(name).then((res) => {
+export const addDeckTC = (name: string) => (dispatch: Dispatch) => {
+    return decksAPI.createDeck(name).then((res) => {
       dispatch(addDeckAC(res.data))
     })
   }
-}
